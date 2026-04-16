@@ -23,7 +23,9 @@ Para rodar o simulador corretamente respeitando a estrutura de pacotes, siga est
    cd /c/Angelo/Java
    
 2. **Compile todos os arquivos da Arena:**
+   ```bash
    javac DESAFIOGEMINI/BATALHA/*.java
 
 3. **Execute o programa apontando o Classpath:**
+   ```bash
    java -cp DESAFIOGEMINI BATALHA.Arena
