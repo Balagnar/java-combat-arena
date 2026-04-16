@@ -6,16 +6,30 @@ public class Arena {
     public static void main(String[] args) {
         
         Guerreiro heroi = new Guerreiro("Heroi", 100, 10);
-        Guerreiro boss = new Guerreiro("Boss", 100, 10);
+        Inimigo slime = new Inimigo("Slime", 100, 10);
 
-        while (heroi.getVida() > 0 && boss.getVida() > 0
-         ) {
-            heroi.darDano(boss);
+        while (heroi.getVida() > 0 && slime.getVida() > 0) {
 
-            if (boss.getVida() > 0){
-            boss.darDano(heroi);
+            heroi.darDano(slime);
+
+            if (slime.getVida() > 0){
+            slime.darDano(heroi);
             }
-        } 
+
+        }
+
+        if (heroi.getVida() == 0){
+
+            System.out.println("O Guerreiro: " + heroi.getNome() + " Foi derrotado: ");
+            System.out.println("O Inimigo: " + slime.getNome() + " Sobreviveu com: " + slime.getVida());
+
+
+        } else {
+
+            System.out.println("O Inimigo: " + slime.getNome() + " Foi derrotado: ");
+            System.out.println("O Guerreiro: " + heroi.getNome() + " Sobreviveu com: " + slime.getVida());
+            
+        }
         
     }
     

@@ -40,20 +40,20 @@ public class Guerreiro{
     }
 
     //classe para dar dano
-    public void darDano(Guerreiro alvo){
+    public void darDano(Inimigo slime){
 
         Random gerador = new Random();
 
         if (gerador.nextInt(10) >= 5) {
 
-            int novaVida = alvo.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
-            alvo.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
+            int novaVida = slime.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
+            slime.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
             System.out.println("Guerreiro" + " " + this.nome + " atacou o alvo com: " + this.dano + " de dano");
-            System.out.println("Alvo: " + alvo.getNome() + " tomou dano, vida atual: " + alvo.getVida() + " de vida:");
+            System.out.println("Alvo: " + slime.getNome() + " tomou dano, vida atual: " + slime.getVida() + " de vida:");
   
             
         } else {
-            System.out.println(this.nome + "Errou e deu 0 de dano.");
+            System.out.println("Guerreiro: " + this.nome + " Errou o ataque!");
         }
 
         
