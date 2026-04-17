@@ -38,6 +38,30 @@ public class Inimigo {
         return this.dano;
     }
 
+    //Class que spawna inimigo
+
+    public void spawn(Inimigo slime){
+
+        Random spawn = new Random();
+
+        boolean spawnou = false;
+
+        while (!spawnou){
+
+
+            if(spawn.nextInt(10) > 5){
+
+                System.out.println("Inimigo " + this.nome + " apareceu!");
+                spawnou = true;
+
+            } else {
+                System.out.println("Cuidado, algo se mexeu em um arbusto proximo");
+            }
+        }
+
+    }
+
+    //Class que faz o inimigo atacar o guerreiro
     public void darDano(Guerreiro heroi){
 
         Random gerador = new Random();
@@ -54,7 +78,5 @@ public class Inimigo {
         }
 
     }
-
-    
 
 }

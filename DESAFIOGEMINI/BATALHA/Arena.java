@@ -5,8 +5,10 @@ public class Arena {
 
     public static void main(String[] args) {
         
-        Guerreiro heroi = new Guerreiro("Heroi", 100, 10);
+        Guerreiro heroi = new Guerreiro("Heroi", 10, 10);
         Inimigo slime = new Inimigo("Slime", 100, 10);
+
+        slime.spawn(slime);
 
         while (heroi.getVida() > 0 && slime.getVida() > 0) {
 
@@ -27,7 +29,7 @@ public class Arena {
         } else {
 
             System.out.println("O Inimigo: " + slime.getNome() + " Foi derrotado: ");
-            System.out.println("O Guerreiro: " + heroi.getNome() + " Sobreviveu com: " + slime.getVida());
+            System.out.println("O Guerreiro: " + heroi.getNome() + " Sobreviveu com: " + heroi.getVida());
             
         }
         
