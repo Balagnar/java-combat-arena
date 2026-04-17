@@ -39,6 +39,21 @@ public class Guerreiro{
         return this.dano;
     }
 
+    public void tomarDano(int danoInimigo){
+
+        Random rngDodge = new Random();
+
+          if(rngDodge.nextInt(10) >= 8){
+
+            System.out.println("Guerreiro: " + this.nome + " Desviou do ataque");
+
+        } else {
+            this.vida -= danoInimigo;
+            System.out.println("Guerreiro: " + this.nome + " Não desviou");
+        }
+
+    }
+
     //classe para dar dano
     public void darDano(Inimigo slime){
 
@@ -48,8 +63,8 @@ public class Guerreiro{
 
             int novaVida = slime.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
             slime.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
-            System.out.println("Guerreiro" + " " + this.nome + " atacou o alvo com: " + this.dano + " de dano");
-            System.out.println("Alvo: " + slime.getNome() + " tomou dano, vida atual: " + slime.getVida() + " de vida:");
+            System.out.println("Guerreiro" + " " + this.nome + " atacou o " + slime.getNome() + "com: " + this.dano + " de dano");
+            System.out.println("Inimigo: " + slime.getNome() + " tomou dano, vida atual: " + slime.getVida() + " de vida:");
   
             
         } else {

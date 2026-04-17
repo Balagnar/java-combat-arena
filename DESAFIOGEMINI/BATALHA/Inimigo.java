@@ -70,11 +70,12 @@ public class Inimigo {
             
             int novaVida = heroi.getVida() - this.dano;
             heroi.setVida(novaVida);
-            System.out.println("Inimigo" + " " + this.nome + " atacou o alvo com: " + this.dano + " de dano");
-            System.out.println("Alvo: " + heroi.getNome() + " tomou dano, vida atual: " + heroi.getVida() + " de vida:");
+            System.out.println("Inimigo " + this.nome + " Atacou com: " + this.dano);
+            System.out.println("Heroi: " + heroi.getNome() + " ficou com: " + heroi.getVida() );
 
         } else {
-            System.out.println("Inimigo: " + this.nome + " Errou o ataque!");
+            
+            System.out.println("Inimigo: " + this.nome + " Errou o ataque sozinho!");
         }
 
     }
