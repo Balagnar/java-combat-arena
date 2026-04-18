@@ -63,14 +63,11 @@ public class Inimigo {
 
     //Class que faz o inimigo atacar o guerreiro
     public void darDano(Guerreiro heroi){
-
         Random gerador = new Random();
 
         if(gerador.nextInt(10) >= 5){
-            
-            int novaVida = heroi.getVida() - this.dano;
-            heroi.setVida(novaVida);
             System.out.println("Inimigo " + this.nome + " Atacou com: " + this.dano);
+            heroi.tomarDano(this.dano);
             System.out.println("Heroi: " + heroi.getNome() + " ficou com: " + heroi.getVida() );
 
         } else {

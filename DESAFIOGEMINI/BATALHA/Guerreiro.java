@@ -44,9 +44,7 @@ public class Guerreiro{
         Random rngDodge = new Random();
 
           if(rngDodge.nextInt(10) >= 8){
-
             System.out.println("Guerreiro: " + this.nome + " Desviou do ataque");
-
         } else {
             this.vida -= danoInimigo;
             System.out.println("Guerreiro: " + this.nome + " Não desviou");
