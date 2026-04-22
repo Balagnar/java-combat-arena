@@ -2,45 +2,46 @@ package BATALHA;
 
 public class Arena {
 
-    public static void main(String[] args) {
+    //Indicador de versão
+    public static final String VERSION = "0.5.0-Alpha";
 
-       
+    //Variaveis de instância
+    private Guerreiro heroi;
+    private Inimigo slime;
 
-        Guerreiro heroi = new Guerreiro("Heroi", 20, 10);
+    //Metodo para criar os objetos
+    public Arena() {
+        this.heroi = new Guerreiro("Heroi", 20, 10);
+        this.slime = new Inimigo("Slime", 20, 10);
+        this.slime.spawn(this.slime);
+    }
 
-        Inimigo slime = new Inimigo("Slime", 20, 10);
-
-
-
-        slime.spawn(slime);
-
-
-
-        while (heroi.getVida() > 0 && slime.getVida() > 0) {
-
-
-
+    //Metodo responsavel pela logica do ataque
+    public void turnoDeAtaque() {
+        if (heroi.getVida() > 0 && slime.getVida() > 0) {
             heroi.darDano(slime);
-
-
-
-            if (slime.getVida() > 0){
-                    slime.darDano(heroi);
-                }
-        }
-
-
-
-        if (heroi.getVida() == 0){
-            System.out.println("O Guerreiro: " + heroi.getNome() + " Foi derrotado: ");
-            System.out.println("O Inimigo: " + slime.getNome() + " Sobreviveu com: " + slime.getVida());
-        } else {
-            System.out.println("O Inimigo: " + slime.getNome() + " Foi derrotado: ");
-            System.out.println("O Guerreiro: " + heroi.getNome() + " Sobreviveu com: " + heroi.getVida());
+            
+            // O ataque do slime deve estar dentro do IF de vida
+            if (slime.getVida() > 0) {
+                slime.darDano(heroi);
+            }
         }
     }
 
-   
+    //Metodos para o MainApp saber os dados dessas variaveis já que são privadas
+    public int getVidaHeroi() {
+        return heroi.getVida();
+    }
 
+    public int getVidaSlime() {
+        return slime.getVida();
+    }
+
+    public String getNomeHeroi() {
+        return heroi.getNome();
+    }
+
+    public String getNomeSlime() {
+        return slime.getNome();
+    }
 }
-

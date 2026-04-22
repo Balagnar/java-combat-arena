@@ -61,7 +61,7 @@ public class Guerreiro{
 
             int novaVida = slime.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
             slime.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
-            System.out.println("Guerreiro" + " " + this.nome + " atacou o " + slime.getNome() + "com: " + this.dano + " de dano");
+            System.out.println("Guerreiro: " + " " + this.nome + " atacou o " + slime.getNome() + "com: " + this.dano + " de dano");
             System.out.println("Inimigo: " + slime.getNome() + " tomou dano, vida atual: " + slime.getVida() + " de vida:");
   
             
