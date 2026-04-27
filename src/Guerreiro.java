@@ -42,10 +42,10 @@ public class Guerreiro{
         Random rngDodge = new Random();
 
           if(rngDodge.nextInt(10) >= 8){
-            return this.nome + " Desviou do ataque";
+            return this.nome + " Desviou do ataque\n";
         } else {
             this.vida -= danoInimigo;
-            return this.nome + " Não desviou";
+            return this.nome + " Não desviou\n";
         }
 
     }
@@ -59,12 +59,12 @@ public class Guerreiro{
 
             int novaVida = slime.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
             slime.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
-            String logEvento =  this.nome + " atacou o " + slime.getNome() + "com: " + this.dano + " de dano! \n"; //variavel para salvar o log de eventos
-            logEvento += "Inimigo: " + slime.getNome() + " perdeu " + slime.getVida() + " de vida!";
+            String logEvento =  this.nome + " atacou o " + slime.getNome() + " com: " + this.dano + " de dano!\n"; //variavel para salvar o log de eventos
+            logEvento += slime.getNome() + " agora tem " + slime.getVida() + " de HP!\n";
             return logEvento;
 
         } else {
-            return this.nome + " Errou o ataque!";
+            return this.nome + " errou o ataque!\n";
         }
 
         

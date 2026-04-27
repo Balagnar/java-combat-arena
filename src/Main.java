@@ -77,24 +77,23 @@ public class Main extends Application {
 
         // Lógica ao clicar no botão "Atacar"
         btAtk.setOnAction(e -> {
-            combate.turnoDeAtaque(); // Executa a lógica de dano
 
             String logEvento = combate.turnoDeAtaque();
 
             // Atualiza os textos de HP na tela
-            logCombate.appendText(combate.getNomeSlime() + " HP: " + combate.getVidaSlime() + "\n");
-            logCombate.appendText(combate.getNomeHeroi() + " HP: " + combate.getVidaHeroi() + "\n");
+            logCombate.appendText(logEvento + "\n");
+            logCombate.setScrollTop(Double.MAX_VALUE);
+
+            // 3. Atualiza os textos de HP e as barras para o jogador ver o impacto
+            hpSlime.setText(combate.getNomeSlime() + " HP: " + combate.getVidaSlime());
+            hpGuerreiro.setText(combate.getNomeHeroi() + " HP: " + combate.getVidaHeroi());
 
             // Atualiza as barras (Vida atual / Vida Máxima)
             barraHeroi.setProgress(combate.getVidaHeroi() / 20.0);
             barraSlime.setProgress(combate.getVidaSlime() / 20.0);
 
             // Verifica se alguém morreu para desativar o botão
-            if (combate.getVidaSlime() <= 0) {
-                logCombate.appendText(combate.getNomeSlime() + " Foi derrotado!" + "\n");
-                btAtk.setDisable(true);
-            } else if (combate.getVidaHeroi() <= 0) {
-                logCombate.appendText(combate.getNomeHeroi() + " Foi derrotado!" + "\n");
+            if (combate.getVidaSlime() <= 0 || combate.getVidaHeroi() <= 0) {
                 btAtk.setDisable(true);
             }
 

@@ -60,19 +60,14 @@ public class Inimigo {
 
     //Class que faz o inimigo atacar o guerreiro
     public String darDano(Guerreiro heroi){
-        Random gerador = new Random();
-
-        if(gerador.nextInt(10) >= 5){
-            String logEvento = this.nome + " Atacou com: " + this.dano + "\n";
-            heroi.tomarDano(this.dano);
-            logEvento +=  heroi.getNome() + " ficou com: " + heroi.getVida() + "\n";
-            return logEvento;
-
-        } else {
-            
-            return this.nome + " Errou o ataque sozinho!";
-        }
-
-    }
+    if(new Random().nextInt(10) >= 5){
+        // PRIMEIRO: Tira a vida
+        heroi.setVida(heroi.getVida() - this.dano); 
+        
+        // SEGUNDO: Cria o texto com a vida já menor
+        return this.nome + " acertou! " + heroi.getNome() + " agora tem " + heroi.getVida() + " HP.";
+    } 
+    return this.nome + " errou o ataque!";
+}
 
 }
