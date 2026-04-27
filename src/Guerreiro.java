@@ -37,21 +37,21 @@ public class Guerreiro{
         return this.dano;
     }
 
-    public void tomarDano(int danoInimigo){
+    public String tomarDano(int danoInimigo){
 
         Random rngDodge = new Random();
 
           if(rngDodge.nextInt(10) >= 8){
-            System.out.println("Guerreiro: " + this.nome + " Desviou do ataque");
+            return this.nome + " Desviou do ataque";
         } else {
             this.vida -= danoInimigo;
-            System.out.println("Guerreiro: " + this.nome + " Não desviou");
+            return this.nome + " Não desviou";
         }
 
     }
 
     //classe para dar dano
-    public void darDano(Inimigo slime){
+    public String darDano(Inimigo slime){
 
         Random gerador = new Random();
 
@@ -59,12 +59,12 @@ public class Guerreiro{
 
             int novaVida = slime.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
             slime.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
-            System.out.println("Guerreiro: " + " " + this.nome + " atacou o " + slime.getNome() + "com: " + this.dano + " de dano");
-            System.out.println("Inimigo: " + slime.getNome() + " tomou dano, vida atual: " + slime.getVida() + " de vida:");
-  
-            
+            String logEvento =  this.nome + " atacou o " + slime.getNome() + "com: " + this.dano + " de dano! \n"; //variavel para salvar o log de eventos
+            logEvento += "Inimigo: " + slime.getNome() + " perdeu " + slime.getVida() + " de vida!";
+            return logEvento;
+
         } else {
-            System.out.println("Guerreiro: " + this.nome + " Errou o ataque!");
+            return this.nome + " Errou o ataque!";
         }
 
         

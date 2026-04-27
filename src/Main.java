@@ -9,11 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.TextArea;
 
 public class Main extends Application {
 
     // Atributos da interface e instância da lógica de combate
     private Arena combate = new Arena();
+    private TextArea logCombate;
     private Label hpGuerreiro, hpSlime;
     private Button btAtk;
     private ImageView visuHeroi, visuSlime;
@@ -38,7 +40,7 @@ public class Main extends Application {
 
         // Estrutura Principal: Título + Arena + Botão de Ataque
         Label titulo = new Label("----- Arena -----");
-        VBox chao = new VBox(30, titulo, arena, btAtk);
+        VBox chao = new VBox(30, titulo, arena, logCombate, btAtk);
         chao.setAlignment(Pos.CENTER);
 
         // Configuração da Janela (Cena)
@@ -56,7 +58,7 @@ public class Main extends Application {
         // Inicializa textos e botões com dados da Arena
         hpGuerreiro = new Label(combate.getNomeHeroi() + " HP: " + combate.getVidaHeroi());
         hpSlime = new Label(combate.getNomeSlime() + " HP: " + combate.getVidaSlime());
-        btAtk = new Button("Atacar Slime");
+        btAtk = new Button("Atacar: " + combate.getNomeSlime());
 
         // Configura as barras de progresso (1.0 = 100%)
         barraHeroi = new ProgressBar(1.0);
@@ -66,26 +68,36 @@ public class Main extends Application {
     }
 
     private void configurarAcoes() {
+
+        logCombate = new TextArea();
+        logCombate.setEditable(false);
+        logCombate.setPrefHeight(100);
+        logCombate.setPrefWidth(200);
+        logCombate.setWrapText(true);
+
         // Lógica ao clicar no botão "Atacar"
         btAtk.setOnAction(e -> {
             combate.turnoDeAtaque(); // Executa a lógica de dano
+
+            String logEvento = combate.turnoDeAtaque();
+
+            // Atualiza os textos de HP na tela
+            logCombate.appendText(combate.getNomeSlime() + " HP: " + combate.getVidaSlime() + "\n");
+            logCombate.appendText(combate.getNomeHeroi() + " HP: " + combate.getVidaHeroi() + "\n");
 
             // Atualiza as barras (Vida atual / Vida Máxima)
             barraHeroi.setProgress(combate.getVidaHeroi() / 20.0);
             barraSlime.setProgress(combate.getVidaSlime() / 20.0);
 
-            // Atualiza os textos de HP na tela
-            hpSlime.setText(combate.getNomeSlime() + " HP: " + combate.getVidaSlime());
-            hpGuerreiro.setText(combate.getNomeHeroi() + " HP: " + combate.getVidaHeroi());
-
             // Verifica se alguém morreu para desativar o botão
             if (combate.getVidaSlime() <= 0) {
-                hpSlime.setText(combate.getNomeSlime() + " Foi derrotado!");
+                logCombate.appendText(combate.getNomeSlime() + " Foi derrotado!" + "\n");
                 btAtk.setDisable(true);
             } else if (combate.getVidaHeroi() <= 0) {
-                hpGuerreiro.setText(combate.getNomeHeroi() + " Foi derrotado!");
+                logCombate.appendText(combate.getNomeHeroi() + " Foi derrotado!" + "\n");
                 btAtk.setDisable(true);
             }
+
         });
     }
 

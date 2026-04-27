@@ -15,15 +15,19 @@ public class Arena {
     }
 
     //Metodo responsavel pela logica do ataque
-    public void turnoDeAtaque() {
+    public String turnoDeAtaque() {
+        String logDano = " ";
+
         if (heroi.getVida() > 0 && slime.getVida() > 0) {
-            heroi.darDano(slime);
             
-            // O ataque do slime deve estar dentro do IF de vida
-            if (slime.getVida() > 0) {
-                slime.darDano(heroi);
-            }
+            logDano = heroi.darDano(slime);
         }
+        
+        if(slime.getVida() > 0){
+            logDano += slime.darDano(heroi);
+        }
+
+        return logDano;
     }
 
     //Metodos para o MainApp saber os dados dessas variaveis já que são privadas

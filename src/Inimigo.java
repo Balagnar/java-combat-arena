@@ -38,7 +38,7 @@ public class Inimigo {
 
     //Class que spawna inimigo
 
-    public void spawn(Inimigo slime){
+    public String spawn(Inimigo slime){
 
         Random spawn = new Random();
 
@@ -46,31 +46,31 @@ public class Inimigo {
 
         while (!spawnou){
 
-
             if(spawn.nextInt(10) > 5){
-
-                System.out.println("Inimigo " + this.nome + " apareceu!");
+                
                 spawnou = true;
-
+                
             } else {
-                System.out.println("Cuidado, algo se mexeu em um arbusto proximo");
+                return "Cuidado, algo se mexeu em um arbusto proximo\n";
             }
         }
-
+        
+        return "Inimigo " + this.nome + " apareceu!\n";
     }
 
     //Class que faz o inimigo atacar o guerreiro
-    public void darDano(Guerreiro heroi){
+    public String darDano(Guerreiro heroi){
         Random gerador = new Random();
 
         if(gerador.nextInt(10) >= 5){
-            System.out.println("Inimigo " + this.nome + " Atacou com: " + this.dano);
+            String logEvento = this.nome + " Atacou com: " + this.dano + "\n";
             heroi.tomarDano(this.dano);
-            System.out.println("Heroi: " + heroi.getNome() + " ficou com: " + heroi.getVida() );
+            logEvento +=  heroi.getNome() + " ficou com: " + heroi.getVida() + "\n";
+            return logEvento;
 
         } else {
             
-            System.out.println("Inimigo: " + this.nome + " Errou o ataque sozinho!");
+            return this.nome + " Errou o ataque sozinho!";
         }
 
     }
