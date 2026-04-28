@@ -13,7 +13,7 @@ Atualmente o projeto está na fase de implementação gráfica (**V0.6.0**), ond
 - [x] Lógica de combate funcional (Ataque/Dano).
 - [x] Organização de diretórios (`src/assets`).
 - [x] Implementação de Sprites (Soldier e Orc).
-- [ ] Implementação de Barras de Vida (ProgressBar).
+- [x] Implementação de Barras de Vida (ProgressBar).
 - [ ] Sistema de animações básicas (Idle/Attack).
 
 ## 🛠️ Tecnologias e Requisitos
