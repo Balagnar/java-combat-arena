@@ -5,7 +5,7 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 ## 🚀 Funcionalidades
 
 - **Combate por Turnos:** O jogador (Guerreiro) enfrenta um Boss em um duelo de vida ou morte.
-- **Lógica de Atributos:** Uso de HP, Dano e Defesa para calcular os resultados de cada rodada.
+- **Lógica de Atributos:** Uso de HP e Dano para calcular os resultados de cada rodada.
 - **Aleatoriedade:** Implementação da classe `Random` para variar o dano dos ataques e tornar os duelos dinâmicos.
 - **POO:** Estrutura baseada em classes (`Guerreiro`, `Arena`, `Boss`) para garantir um código organizado e escalável.
 
@@ -20,4 +20,4 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 
 * **Linguagem:** Java 17+ (Atualmente utilizando Java 21)
 * **Versionamento:** Git & GitHub
-* **Interface:** JavaFX
+* **Interface:** Nessa versão ainda não era utilizada interfaces.
