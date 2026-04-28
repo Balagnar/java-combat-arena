@@ -9,23 +9,23 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 - **Aleatoriedade:** Implementação da classe `Random` para variar o dano dos ataques e tornar os duelos dinâmicos.
 - **POO:** Estrutura baseada em classes (`Guerreiro`, `Arena`, `Boss`) para garantir um código organizado e escalável.
 
+## 🪵 Histórico de Versões
+
+### [v0.0.1] - Lógica Base (Console)
+- **Lógica de Dano:** Implementação do cálculo de subtração de vida baseado nos atributos.
+- **Sistema de Morte:** Identificação de HP zero e encerramento automático do combate.
+- **Estrutura Base:** Primeira versão funcional rodando via terminal.
+
 ## 🛠️ Tecnologias Utilizadas
 
-* **Linguagem:** Java 17+
+* **Linguagem:** Java 17+ (Atualmente utilizando Java 21)
 * **Versionamento:** Git & GitHub
+* **Interface:** JavaFX
 
-## 🎮 Como Executar
+## 🎮 Como Executar (Versão Console v0.0.1)
 
 Para rodar o simulador corretamente respeitando a estrutura de pacotes, siga estes passos no terminal:
 
 1. **Vá para a pasta raiz do projeto:**
    ```bash
    cd /c/Angelo/Java
-   
-2. **Compile todos os arquivos da Arena:**
-   ```bash
-   javac DESAFIOGEMINI/BATALHA/*.java
-
-3. **Execute o programa apontando o Classpath:**
-   ```bash
-   java -cp DESAFIOGEMINI BATALHA.Arena
