@@ -6,7 +6,6 @@ public class Guerreiro{
     private int vida;
     private int dano;
 
-
     public Guerreiro(String nome, int vida, int dano){
         this.nome = nome;
         this.vida = vida;
@@ -52,19 +51,16 @@ public class Guerreiro{
 
     //classe para dar dano
     public String darDano(Inimigo slime){
+        if (new Random().nextInt(10) >= 5) {
 
-        Random gerador = new Random();
-
-        if (gerador.nextInt(10) >= 5) {
-
-            if(new Random().nextInt(10) >= 5){
             // PRIMEIRO: Tira a vida
             slime.setVida(slime.getVida() - this.dano); 
         
             // SEGUNDO: Cria o texto com a vida já menor
             return this.nome + " acertou! " + slime.getNome() + " agora tem " + slime.getVida() + " HP.";
-            }
-        } 
+            
+        }
+
         return this.nome + " errou o ataque!";
     }
 }

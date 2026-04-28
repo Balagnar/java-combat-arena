@@ -4,6 +4,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+//https://game-icons.net/ - para pegar assets
+
 public class Main extends Application {
 
     @Override

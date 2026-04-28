@@ -37,37 +37,31 @@ public class Inimigo {
     }
 
     //Class que spawna inimigo
-
-    public String spawn(Inimigo slime){
-
-        Random spawn = new Random();
-
-        boolean spawnou = false;
-
-        while (!spawnou){
-
-            if(spawn.nextInt(10) > 5){
-                
-                spawnou = true;
-                
-            } else {
-                return "Cuidado, algo se mexeu em um arbusto proximo\n";
-            }
-        }
-        
-        return "Inimigo " + this.nome + " apareceu!\n";
-    }
+    //public String spawn(Inimigo slime){
+    //    Random spawn = new Random();
+    //    boolean spawnou = false;
+    //    while (!spawnou){
+    //        if(spawn.nextInt(10) > 5){
+    //            spawnou = true;
+    //        } else {
+    //            return "Cuidado, algo se mexeu em um arbusto proximo\n";
+    //        }
+    //    }
+    //    return "Inimigo " + this.nome + " apareceu!\n";
+    //}
 
     //Class que faz o inimigo atacar o guerreiro
     public String darDano(Guerreiro heroi){
-    if(new Random().nextInt(10) >= 5){
-        // PRIMEIRO: Tira a vida
-        heroi.setVida(heroi.getVida() - this.dano); 
+        if(new Random().nextInt(10) >= 5){
+
+            // PRIMEIRO: Tira a vida
+            heroi.setVida(heroi.getVida() - this.dano); 
         
-        // SEGUNDO: Cria o texto com a vida já menor
-        return this.nome + " acertou! " + heroi.getNome() + " agora tem " + heroi.getVida() + " HP.";
-    } 
-    return this.nome + " errou o ataque!";
-}
+            // SEGUNDO: Cria o texto com a vida já menor
+            return this.nome + " acertou! " + heroi.getNome() + " agora tem " + heroi.getVida() + " HP.";
+        } 
+    
+        return this.nome + " errou o ataque!";
+    }
 
 }

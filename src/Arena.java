@@ -8,9 +8,9 @@ public class Arena {
 
     //Metodo para criar os objetos
     public Arena() {
-        this.heroi = new Guerreiro("Heroi", 20, 10);
-        this.slime = new Inimigo("Slime", 20, 10);
-        this.slime.spawn(this.slime);
+        this.heroi = new Guerreiro("Heroi", 20, 20);
+        this.slime = new Inimigo("Slime", 200, 20);
+        //this.slime.spawn(this.slime);
     }
 
     //Metodo responsavel pela logica do ataque
@@ -19,12 +19,14 @@ public class Arena {
 
         // 1. Herói ataca
         if (heroi.getVida() > 0) {
-         log += heroi.darDano(slime).trim(); // .trim() remove espaços/enters extras
+            log += heroi.darDano(slime).trim(); // .trim() remove espaços/enters extras
+        } else {
+            log += "\n" + heroi.getNome() + " foi derrotado!";
         }
 
-         // 2. Slime contra-ataca (se estiver vivo)
+        // 2. Slime contra-ataca (se estiver vivo)
         if (slime.getVida() > 0) {
-          log += "\n" + slime.darDano(heroi).trim(); 
+            log += "\n" + slime.darDano(heroi).trim(); 
         } else {
             log += "\n" + slime.getNome() + " foi derrotado!";
         }
