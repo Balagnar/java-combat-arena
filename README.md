@@ -1,33 +1,58 @@
-# ⚔️ Arena Project - JavaFX RPG
+# 🛡️ Java Combat Arena
 
-Um simulador de combate por turnos desenvolvido em **Java**, focado em aprendizado de POO, interface gráfica e gestão de assets.
+Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi criado para exercitar lógica de programação, manipulação de objetos e estruturas de controle.
 
-## 🕹️ O Jogo
-Atualmente o projeto está na fase de implementação gráfica (**V0.6.0**), onde substituímos a interface de texto por elementos visuais dinâmicos.
+# 🚀 Funcionalidades
 
-### Personagens Atuais:
-* **Herói:** Um soldado destemido pronto para a batalha.
-* **Inimigo:** Um Orc enfurecido (substituindo o antigo Slime).
+- **Combate por Turnos:** O jogador (Guerreiro) enfrenta um Boss em um duelo de vida ou morte.
+- **Lógica de Atributos:** Uso de HP e Dano para calcular os resultados de cada rodada.
+- **Aleatoriedade:** Implementação da classe `Random` para variar o dano dos ataques e tornar os duelos dinâmicos.
+- **POO:** Estrutura baseada em classes (`Guerreiro`, `Arena`, `Boss`, `Main`) para garantir um código organizado e escalável.
 
-## 🚀 Progresso do Desenvolvimento
-- [x] Lógica de combate funcional (Ataque/Dano).
-- [x] Organização de diretórios (`src/assets`).
-- [x] Implementação de Sprites (Soldier e Orc).
-- [ ] Implementação de Barras de Vida (ProgressBar).
-- [ ] Sistema de animações básicas (Idle/Attack).
+# 🪵 Histórico de Versões
 
-## 🛠️ Tecnologias e Requisitos
-* **Java 25** (ou superior)
-* **JavaFX 23**
-* **Git** para controle de versão
+## [v1.2.1] - Reset de Instância e Morte Dinâmica (Atual)
+- **Sistema de Reset:** Implementação da lógica de reiniciar o jogo sem fechar a aplicação, criando uma nova instância limpa da `Arena`.
+- **Feedback Visual de Derrota:** Adição de estados visuais para morte (Guerreiro vira lápide e Slime vira poça).
+- **Botão Inteligente:** O botão de "Atacar" agora transforma-se em "Reiniciar" automaticamente ao fim do combate.
+- **Refatoração de Código:** Limpeza de variáveis globais para evitar bugs ao reiniciar a partida.
 
-## 📂 Como configurar o ambiente
-Como o projeto utiliza bibliotecas externas que não são enviadas ao Git (por segurança e tamanho), siga estes passos:
+## [v1.0.0] - Integração com Scene Builder e FXML
+- **Design Visual Profissional:** Transição do layout construído via código para o uso do **Scene Builder**.
+- **Separação de Responsabilidades:** Implementação de arquivos `.fxml` e classes `Controller`.
 
-1. Clone o repositório: `git clone https://github.com/seu-usuario/seu-repo.git`
-2. Crie uma pasta chamada `lib` na raiz do projeto.
-3. Adicione as bibliotecas do **JavaFX** dentro da pasta `lib`.
-4. Configure o seu VS Code (`launch.json`) para ler as bibliotecas a partir da pasta local.
+## [v0.9.0] - Identidade Visual e Interatividade
+- **Elementos Visuais:** Inclusão das primeiras imagens (sprites) e `ProgressBar`.
+- **Controle do Jogador:** Adição do Botão de Ataque manual.
 
----
-*Status do Projeto: Em desenvolvimento ativo 🛠️*
+## [v0.6.0] - Correção de Lógica e Pastas (Chore)
+- **Cálculo de Dano:** Correção do bug onde os personagens não perdiam vida.
+- **Hierarquia de Pastas:** Ajuste organizacional para facilidade de desenvolvimento.
+- **Log de Eventos:** Implementação do histórico de combate no terminal.
+
+## [v0.0.1] - Base do Sistema (Ponto Zero)
+- **Core do Jogo:** Lógica base de combate e morte via console.
+
+# 🛠️ Tecnologias Utilizadas
+
+* **Linguagem:** Java 17+ (Recomendado Java 21)
+* **Interface:** JavaFX & Scene Builder
+* **Versionamento:** Git & GitHub
+
+# 🎮 Como Executar
+
+### Pré-requisitos
+* Ter o **Java JDK** (17 ou superior) instalado.
+* (Opcional) **IntelliJ IDEA** ou **VS Code** com extensões para Java/JavaFX.
+
+### Executando via IDE (Mais fácil)
+1. Clone o repositório ou baixe o código.
+2. Abra o projeto na sua IDE.
+3. Certifique-se de que a biblioteca **JavaFX** está configurada no seu Classpath.
+4. Execute a classe `Main.java` dentro do pacote correspondente.
+
+### Executando via Terminal
+1. Navegue até a pasta raiz do projeto.
+2. Compile os arquivos (exemplo para estrutura com pacotes):
+   ```bash
+   javac --module-path /caminho/para/javafx/lib --add-modules javafx.controls,javafx.fxml DESAFIOGEMINI/BATALHA/*.java
