@@ -57,18 +57,15 @@ public class Guerreiro{
 
         if (gerador.nextInt(10) >= 5) {
 
-            int novaVida = slime.getVida() - this.dano; //"novaVida" recebe o valor da vida atual - dano
-            slime.setVida(novaVida); //"nova vida" seta valor na vida do alvo.
-            String logEvento =  this.nome + " atacou o " + slime.getNome() + " com: " + this.dano + " de dano!\n"; //variavel para salvar o log de eventos
-            logEvento += slime.getNome() + " agora tem " + slime.getVida() + " de HP!\n";
-            return logEvento;
-
-        } else {
-            return this.nome + " errou o ataque!\n";
-        }
-
+            if(new Random().nextInt(10) >= 5){
+            // PRIMEIRO: Tira a vida
+            slime.setVida(slime.getVida() - this.dano); 
         
-        
+            // SEGUNDO: Cria o texto com a vida já menor
+            return this.nome + " acertou! " + slime.getNome() + " agora tem " + slime.getVida() + " HP.";
+            }
+        } 
+        return this.nome + " errou o ataque!";
     }
 }
 

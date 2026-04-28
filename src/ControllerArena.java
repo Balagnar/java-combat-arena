@@ -15,7 +15,8 @@ public class ControllerArena {
     private Button btAtk; // O fx:id do botão no Scene Builder
 
     @FXML
-    private ProgressBar barraHeroi, barraSlime;
+    private ProgressBar barraHeroi;
+    private ProgressBar barraSlime;
 
     @FXML
     void Atacar() {
