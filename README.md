@@ -21,11 +21,3 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 * **Linguagem:** Java 17+ (Atualmente utilizando Java 21)
 * **Versionamento:** Git & GitHub
 * **Interface:** JavaFX
-
-## 🎮 Como Executar (Versão Console v0.0.1)
-
-Para rodar o simulador corretamente respeitando a estrutura de pacotes, siga estes passos no terminal:
-
-1. **Vá para a pasta raiz do projeto:**
-   ```bash
-   cd /c/Angelo/Java
