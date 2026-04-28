@@ -13,8 +13,8 @@ Atualmente o projeto está na fase de implementação gráfica (**V0.6.0**), ond
 - [x] Lógica de combate funcional (Ataque/Dano).
 - [x] Organização de diretórios (`src/assets`).
 - [x] Implementação de Sprites (Soldier e Orc).
-- [ ] Implementação de Barras de Vida (ProgressBar).
-- [ ] Sistema de animações básicas (Idle/Attack).
+- [X] Implementação de Barras de Vida (ProgressBar).
+- [x] Sistema de animações básicas (Morte).
 
 ## 🛠️ Tecnologias e Requisitos
 * **Java 25** (ou superior)
