@@ -1,33 +1,30 @@
-# ⚔️ Arena Project - JavaFX RPG
+# 🛡️ Java Combat Arena
 
-Um simulador de combate por turnos desenvolvido em **Java**, focado em aprendizado de POO, interface gráfica e gestão de assets.
+Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi criado para exercitar lógica de programação, manipulação de objetos e estruturas de controle.
 
-## 🕹️ O Jogo
-Atualmente o projeto está na fase de implementação gráfica (**V0.6.0**), onde substituímos a interface de texto por elementos visuais dinâmicos.
+# 🚀 Funcionalidades
 
-### Personagens Atuais:
-* **Herói:** Um soldado destemido pronto para a batalha.
-* **Inimigo:** Um Orc enfurecido (substituindo o antigo Slime).
+- **Combate por Turnos:** O jogador (Guerreiro) enfrenta um Boss em um duelo de vida ou morte.
+- **Lógica de Atributos:** Uso de HP e Dano para calcular os resultados de cada rodada.
+- **Aleatoriedade:** Implementação da classe `Random` para variar o dano dos ataques e tornar os duelos dinâmicos.
+- **POO:** Estrutura baseada em classes (`Guerreiro`, `Arena`, `Boss`, `Main`) para garantir um código organizado e escalável.
 
-## 🚀 Progresso do Desenvolvimento
-- [x] Lógica de combate funcional (Ataque/Dano).
-- [x] Organização de diretórios (`src/assets`).
-- [x] Implementação de Sprites (Soldier e Orc).
-- [ ] Implementação de Barras de Vida (ProgressBar).
-- [ ] Sistema de animações básicas (Idle/Attack).
+# 🪵 Histórico de Versões
 
-## 🛠️ Tecnologias e Requisitos
-* **Java 25** (ou superior)
-* **JavaFX 23**
-* **Git** para controle de versão
+## [v0.6.0] - Correção de Lógica e Pastas (Chore)
+### Correções
+- **Cálculo de Dano:** Correção do bug onde os personagens não perdiam vida durante os turnos.
+- **Sincronização de Atributos:** Ajuste nos métodos de *getters* e *setters* para garantir que o HP fosse atualizado corretamente na memória.
+- **Correção Hierarquia de Pastas:** Foi ajustado a Hierarquia de Pastas e Arquivos para facilidade de TypeCode.
+### Nova Funcionalidade:
+- **Log De Eventos** Implementação de um LOG de Eventos no Terminal.
 
-## 📂 Como configurar o ambiente
-Como o projeto utiliza bibliotecas externas que não são enviadas ao Git (por segurança e tamanho), siga estes passos:
+## [v0.0.1] - Base do Sistema (Ponto Zero)
+- **Core do Jogo:** Criação da lógica de combate puramente via console.
+- **Mecanismo de Morte:** O sistema identifica o fim do jogo ao zerar o HP de um dos personagens.
 
-1. Clone o repositório: `git clone https://github.com/seu-usuario/seu-repo.git`
-2. Crie uma pasta chamada `lib` na raiz do projeto.
-3. Adicione as bibliotecas do **JavaFX** dentro da pasta `lib`.
-4. Configure o seu VS Code (`launch.json`) para ler as bibliotecas a partir da pasta local.
+# 🛠️ Tecnologias Utilizadas
 
----
-*Status do Projeto: Em desenvolvimento ativo 🛠️*
+* **Linguagem:** Java 17+ (Atualmente utilizando Java 21)
+* **Versionamento:** Git & GitHub
+* **Interface:** Não utiliza Interface no momento.
