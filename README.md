@@ -4,21 +4,30 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 
 # 🚀 Funcionalidades
 
-- **Combate por Turnos:** O jogador (Guerreiro) enfrenta um Boss em um duelo de vida ou morte.
+- **Combate por Turnos:** O jogador (Guerreiro) enfrenta inimigos em um duelo de vida ou morte.
 - **Lógica de Atributos:** Uso de HP e Dano para calcular os resultados de cada rodada.
-- **Aleatoriedade:** Implementação da classe `Random` para variar o dano dos ataques e tornar os duelos dinâmicos.
-- **POO:** Estrutura baseada em classes (`Guerreiro`, `Arena`, `Boss`, `Main`) para garantir um código organizado e escalável.
+- **Sistema de Sorteio:** Agora a arena utiliza a classe `Random` para sortear dinamicamente qual inimigo você enfrentará ao iniciar o combate.
+- **Habilidades Especiais:** Implementação de mecânicas únicas, como a ressurreição automática de certos inimigos.
+- **POO Avançado:** Uso de Herança e Polimorfismo (`Inimigo` -> `Esqueleto` / `Slime`) para facilitar a expansão do bestiário.
 
 ### Personagens Atuais:
 * **Herói:** Um soldado destemido pronto para a batalha.
-* **Inimigo:** Um Orc enfurecido (substituindo o antigo Slime).
+* **Inimigos:** Esqueleto (Guerreiro Morto-Vivo) e Slime (Criatura viscosa).
 
 ## 🚀 Progresso do Desenvolvimento
 - [x] Lógica de combate funcional (Ataque/Dano).
 - [x] Organização de diretórios (`src/assets`).
-- [x] Implementação de Sprites (Soldier e Orc).
-- [ ] Implementação de Barras de Vida (ProgressBar).
+- [x] Implementação de Sprites (Soldier, Esqueleto, Slime).
+- [x] Implementação de Barras de Vida (ProgressBar).
+- [x] Sistema de Sorteio de Inimigos (Randomização de Arena).
 - [ ] Sistema de animações básicas (Idle/Attack).
+- [ ] Sistema de itens e cura.
+
+## [v1.3.0] - Sistema de Sorteio e Novos Inimigos (Feat)
+- **Sorteio de Arena:** Implementada lógica para instanciar inimigos aleatórios no início do jogo.
+- **Mecânica de Ressurreição:** Classe `Esqueleto` agora possui lógica própria para reviver após a primeira derrota.
+- **Polimorfismo de UI:** O controlador identifica o tipo de inimigo e atualiza a imagem e status dinamicamente.
+- **Bugfix (Sanitização):** Proteção contra HP negativo nas barras de vida usando `Math.max`.
 
 ## [v0.6.0] - Correção de Lógica e Pastas (Chore)
 - **Cálculo de Dano:** Correção do bug onde os personagens não perdiam vida.
@@ -45,9 +54,3 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 2. Abra o projeto na sua IDE.
 3. Certifique-se de que a biblioteca **JavaFX** está configurada no seu Classpath.
 4. Execute a classe `Main.java` dentro do pacote correspondente.
-
-### Executando via Terminal
-1. Navegue até a pasta raiz do projeto.
-2. Compile os arquivos (exemplo para estrutura com pacotes):
-   ```bash
-   javac --module-path /caminho/para/javafx/lib --add-modules javafx.controls,javafx.fxml DESAFIOGEMINI/BATALHA/*.java
