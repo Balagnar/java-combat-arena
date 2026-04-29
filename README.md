@@ -11,6 +11,14 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 
 # 🪵 Histórico de Versões
 
+## [v0.6.0] - Correção de Lógica e Pastas (Chore)
+### Correções
+- **Cálculo de Dano:** Correção do bug onde os personagens não perdiam vida durante os turnos.
+- **Sincronização de Atributos:** Ajuste nos métodos de *getters* e *setters* para garantir que o HP fosse atualizado corretamente na memória.
+- **Correção Hierarquia de Pastas:** Foi ajustado a Hierarquia de Pastas e Arquivos para facilidade de TypeCode.
+### Nova Funcionalidade:
+- **Log De Eventos** Implementação de um LOG de Eventos no Terminal.
+
 ## [v0.0.1] - Base do Sistema (Ponto Zero)
 - **Core do Jogo:** Criação da lógica de combate puramente via console.
 - **Mecanismo de Morte:** O sistema identifica o fim do jogo ao zerar o HP de um dos personagens.
