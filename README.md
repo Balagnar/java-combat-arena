@@ -11,7 +11,7 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 
 # 🪵 Histórico de Versões
 
-### [v1.0.0] - Integração com Scene Builder e FXML
+## [v1.0.0] - Integração com Scene Builder e FXML
 - **Design Visual Profissional:** Transição do layout construído via código para o uso do **Scene Builder**, permitindo uma interface mais rica e organizada.
 - **Separação de Responsabilidades:** Implementação de arquivos `.fxml` para o layout e classes `Controller` para a lógica da interface.
 - **Estabilidade da UI:** Refinamento dos componentes gráficos para garantir que a janela e os elementos se comportem corretamente.
