@@ -14,7 +14,7 @@ public class ControllerArena {
     @FXML private Button btAtk;
 
     @FXML private ProgressBar barraHeroi;
-    @FXML private ProgressBar barraSlime;
+    @FXML private ProgressBar barraInimigo;
 
     @FXML private ImageView Heroi;
     @FXML private ImageView Inimigo;
@@ -33,24 +33,41 @@ public class ControllerArena {
 
     @FXML
     void Atacar() {
+
+        if(combate.getInimigo() instanceof Esqueleto){
+            Inimigo.setImage(pegarImagem("Creature", "skeleton.png"));
+
+        } else {
+            Inimigo.setImage(pegarImagem("Creature", "slime.png"));
+        }
+
         // Toda aquela lógica que estava no Main agora vem pra cá
         String logEvento = combate.turnoDeAtaque();
 
         logCombate.appendText(logEvento + "\n");
 
         // Atualiza as barras (exemplo usando vida fixa de 20)
-        barraHeroi.setProgress(combate.getVidaHeroi() / 20.0);
-        barraSlime.setProgress(combate.getVidaSlime() / 20.0);
+        barraHeroi.setProgress((combate.getVidaHeroi() / (double) combate.getVidaMaxHeroi()));
+        barraInimigo.setProgress((combate.getVidaInimigo() / (double) combate.getVidaMaxInimigo()));
 
         if (btAtk.getText().equals("Reiniciar")){
 
             combate = new Arena();
 
-            barraHeroi.setProgress(combate.getVidaHeroi() / 20.0);
-            barraSlime.setProgress(combate.getVidaSlime() / 20.0);
+            barraHeroi.setProgress(combate.getVidaMaxHeroi());
+            barraInimigo.setProgress(combate.getVidaInimigo());
 
-            Inimigo.setImage(pegarImagem("Creature", "slime.png"));
-            Heroi.setImage(pegarImagem("Body", "swordman.png"));
+                if(combate.getInimigo() instanceof Esqueleto){
+
+                    Inimigo.setImage(pegarImagem("Creature", "skeleton.png"));
+
+                } else {
+
+                    Inimigo.setImage(pegarImagem("Creature", "slime.png"));
+                    
+                }
+                
+                Heroi.setImage(pegarImagem("Body", "swordman.png"));
 
             btAtk.setText("Atacar");
 
@@ -58,9 +75,12 @@ public class ControllerArena {
         }
 
         // Verifica fim de jogo
-        if (combate.getVidaSlime() <= 0) {
+        if (combate.getVidaInimigo() <= 0) {
+
             Inimigo.setImage(pegarImagem("Liquid", "spill.png"));
+
             logCombate.appendText("O COMBATE TERMINOU!\n");
+
             btAtk.setText("Reiniciar");
 
         } else if (combate.getVidaHeroi() <= 0){

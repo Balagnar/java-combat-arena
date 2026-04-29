@@ -2,16 +2,33 @@ import java.util.Random;
 
 public class Inimigo {
 
-    private String nome;
-    private int vida;
-    private int dano;
+    protected String nome;
+    protected int vida;
+    protected int dano;
+    protected int vidaMax;
 
-    public Inimigo(String nome, int vida, int dano){
+    public Inimigo(String nome, int vida, int dano, int vidaMax){
         this.nome = nome;
         this.vida = vida;
         this.dano = dano;
+        this.vidaMax = vidaMax;
     }
 
+    //Class que faz o inimigo atacar o guerreiro
+    public String darDano(Guerreiro heroi){
+        if(new Random().nextInt(10) >= 5){
+            // PRIMEIRO: Tira a vida
+            String resultado = heroi.tomarDano(this);
+        
+            // SEGUNDO: Cria o texto com a vida já menor
+            return resultado;
+        } 
+    
+        return this.nome + " errou o ataque sozinho!";
+    }
+
+//-------------------------------------CAMPO PARA DECLARAR GETs e SETs--------------------------------------//
+    
     public void setNome(String nome){
         this.nome = nome;
     }
@@ -21,7 +38,7 @@ public class Inimigo {
     }
 
     public void setVida(int vida){
-        this.vida = vida;
+        this.vida = Math.max(0, vida);
     }
 
     public int getVida(){
@@ -36,32 +53,12 @@ public class Inimigo {
         return this.dano;
     }
 
-    //Class que spawna inimigo
-    //public String spawn(Inimigo slime){
-    //    Random spawn = new Random();
-    //    boolean spawnou = false;
-    //    while (!spawnou){
-    //        if(spawn.nextInt(10) > 5){
-    //            spawnou = true;
-    //        } else {
-    //            return "Cuidado, algo se mexeu em um arbusto proximo\n";
-    //        }
-    //    }
-    //    return "Inimigo " + this.nome + " apareceu!\n";
-    //}
+    public void setVidaMax(int vidaMax){
+        this.vidaMax = vidaMax;
+    }
 
-    //Class que faz o inimigo atacar o guerreiro
-    public String darDano(Guerreiro heroi){
-        if(new Random().nextInt(10) >= 5){
-
-            // PRIMEIRO: Tira a vida
-            heroi.setVida(heroi.getVida() - this.dano); 
-        
-            // SEGUNDO: Cria o texto com a vida já menor
-            return this.nome + " acertou! " + heroi.getNome() + " agora tem " + heroi.getVida() + " HP.";
-        } 
-    
-        return this.nome + " errou o ataque!";
+    public int getVidaMax(){
+        return this.vidaMax;
     }
 
 }
