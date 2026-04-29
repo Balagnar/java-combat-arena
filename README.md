@@ -23,6 +23,8 @@ Um simulador de combate em turnos desenvolvido em **Java**. Este projeto foi cri
 - [ ] Sistema de animações básicas (Idle/Attack).
 - [ ] Sistema de itens e cura.
 
+# 🪵 Histórico de Versões
+
 ## [v1.3.0] - Sistema de Sorteio e Novos Inimigos (Feat)
 - **Sorteio de Arena:** Implementada lógica para instanciar inimigos aleatórios no início do jogo.
 - **Mecânica de Ressurreição:** Classe `Esqueleto` agora possui lógica própria para reviver após a primeira derrota.
