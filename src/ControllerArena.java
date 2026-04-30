@@ -13,10 +13,10 @@ public class ControllerArena {
 
     @FXML private Button btAtk;
 
-    @FXML private ProgressBar barraHeroi;
+    @FXML private ProgressBar barraGuerreiro;
     @FXML private ProgressBar barraInimigo;
 
-    @FXML private ImageView Heroi;
+    @FXML private ImageView Guerreiro;
     @FXML private ImageView Inimigo;
 
     // Instância da lógica puxando a classe Arena
@@ -33,69 +33,89 @@ public class ControllerArena {
 
     @FXML
     void Atacar() {
+        // PARTE 1: Lógica de Reiniciar
+        if (btAtk.getText().equals("Reiniciar")) {
+            combate = new Arena();
+        
+            // Reset visual
+            barraGuerreiro.setProgress(1.0); // 1.0 é 100%
+            barraInimigo.setProgress(1.0);
+            logCombate.clear(); // Limpa o log para a nova luta
+        
+            Guerreiro.setImage(pegarImagem("Body", "swordman.png"));
+            
+            if (combate.getInimigo() instanceof Esqueleto) {
+                Inimigo.setImage(pegarImagem("Creature", "skeleton.png"));
+            } else {
+                Inimigo.setImage(pegarImagem("Creature", "slime.png"));
+            }
 
-        if(combate.getInimigo() instanceof Esqueleto){
+            btAtk.setText("Atacar");
+            return; // Sai do método aqui para não atacar no mesmo clique
+        }
+
+        // PARTE 2: Lógica de Atacar (só roda se o botão NÃO for Reiniciar)
+        
+        // Atualiza imagem do inimigo (revelação)
+        if (combate.getInimigo() instanceof Esqueleto) {
             Inimigo.setImage(pegarImagem("Creature", "skeleton.png"));
-
         } else {
             Inimigo.setImage(pegarImagem("Creature", "slime.png"));
         }
 
-        // Toda aquela lógica que estava no Main agora vem pra cá
-        String logEvento = combate.turnoDeAtaque();
+        String logEventos = combate.turnoDeAtaque();
+        logCombate.appendText(logEventos + "\n");
 
-        logCombate.appendText(logEvento + "\n");
-
-        // Atualiza as barras (exemplo usando vida fixa de 20)
-        barraHeroi.setProgress((combate.getVidaHeroi() / (double) combate.getVidaMaxHeroi()));
+        // Atualiza barras
+        barraGuerreiro.setProgress((combate.getVidaHeroi() / (double) combate.getVidaMaxHeroi()));
         barraInimigo.setProgress((combate.getVidaInimigo() / (double) combate.getVidaMaxInimigo()));
 
-        if (btAtk.getText().equals("Reiniciar")){
-
-            combate = new Arena();
-
-            barraHeroi.setProgress(combate.getVidaMaxHeroi());
-            barraInimigo.setProgress(combate.getVidaInimigo());
-
-                if(combate.getInimigo() instanceof Esqueleto){
-
-                    Inimigo.setImage(pegarImagem("Creature", "skeleton.png"));
-
-                } else {
-
-                    Inimigo.setImage(pegarImagem("Creature", "slime.png"));
-                    
-                }
-                
-                Heroi.setImage(pegarImagem("Body", "swordman.png"));
-
-            btAtk.setText("Atacar");
-
-            return;
+        // --- LOGICA DE ANIMAÇÃO E FIM DE JOGO ---
+    
+        // 1. Verifica se o esqueleto caiu e precisa remontar
+        if (combate.getInimigo() instanceof Esqueleto && combate.getVidaInimigo() <= 0) {
+            // Se o remontouID ainda for falso lá na classe Esqueleto, ele vai animar
+            // Usamos uma verificação extra para garantir que ele não anime na morte definitiva
+            if (!((Esqueleto) combate.getInimigo()).remontouID) { 
+                executarAnimacaoRemontar();
+                return; // SAI DO MÉTODO: Não deixa o botão virar "Reiniciar" ainda
+            }
         }
 
-        // Verifica fim de jogo
+        // 2. Se chegou aqui e a vida é 0, é morte definitiva
         if (combate.getVidaInimigo() <= 0) {
-
-            Inimigo.setImage(pegarImagem("Liquid", "spill.png"));
-
-            logCombate.appendText("O COMBATE TERMINOU!\n");
-
+            if (combate.getInimigo() instanceof Esqueleto) {
+                Inimigo.setImage(pegarImagem("Death", "carrion.png"));
+            } else {
+                Inimigo.setImage(pegarImagem("Liquid", "spill.png"));
+            }
+            logCombate.appendText("VITÓRIA! O inimigo caiu.\n");
             btAtk.setText("Reiniciar");
 
-        } else if (combate.getVidaHeroi() <= 0){
-
-            Heroi.setImage(pegarImagem("Body", "skeleton.png"));
-
-            pause.setOnFinished(event -> {
-                Heroi.setImage(pegarImagem("Death","tombstone.png"));
-            });
-
-            pause.play();
-
-            logCombate.appendText("O COMBATE TERMINOU!\n");
-
+        } else if (combate.getVidaHeroi() <= 0) {
+            // ... (sua lógica de derrota com a lápide)
             btAtk.setText("Reiniciar");
         }
+
     }
+
+    private void executarAnimacaoRemontar() {
+    // 1. O esqueleto cai (vira ossos)
+    Inimigo.setImage(pegarImagem("Death", "carrion.png")); // use o nome real do seu arquivo
+    btAtk.setDisable(true); // Evita cliques extras durante a animação
+
+    PauseTransition delay = new PauseTransition(Duration.seconds(1.0));
+    delay.setOnFinished(e -> {
+        // 2. Executa a cura lógica na classe Esqueleto
+        String msg = ((Esqueleto) combate.getInimigo()).remontar();
+        logCombate.appendText(msg + "\n");
+
+        // 3. Volta a imagem do esqueleto vivo e libera o botão
+        Inimigo.setImage(pegarImagem("Creature", "skeleton.png"));
+        barraInimigo.setProgress(combate.getVidaInimigo() / (double) combate.getVidaMaxInimigo());
+        btAtk.setDisable(false);
+    });
+    
+    delay.play();
+}
 }

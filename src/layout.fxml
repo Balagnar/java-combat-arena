@@ -11,16 +11,16 @@
    <children>
       <TextArea fx:id="logCombate" layoutX="31.0" layoutY="245.0" prefHeight="81.0" prefWidth="543.0" />
       <Button fx:id="btAtk" contentDisplay="CENTER" layoutX="258.0" layoutY="341.0" minHeight="10.0" minWidth="50.0" mnemonicParsing="false" onAction="#Atacar" prefHeight="25.0" prefWidth="90.0" text="Atacar" textAlignment="CENTER" wrapText="true" />
-      <ProgressBar fx:id="barraHeroi" layoutX="73.0" layoutY="82.0" prefWidth="200.0" progress="1.0" />
+      <ProgressBar fx:id="barraGuerreiro" layoutX="73.0" layoutY="82.0" prefWidth="200.0" progress="1.0" />
       <ProgressBar fx:id="barraInimigo" layoutX="333.0" layoutY="82.0" prefWidth="200.0" progress="1.0" />
-      <ImageView fx:id="Heroi" fitHeight="100.0" fitWidth="100.0" layoutX="123.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="Guerreiro" fitHeight="100.0" fitWidth="109.0" layoutX="123.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/Body/swordman.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Inimigo" fitHeight="59.0" fitWidth="50.0" layoutX="408.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true" scaleX="-1.0">
+      <ImageView fx:id="Inimigo" fitHeight="108.0" fitWidth="100.0" layoutX="383.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" scaleX="-1.0">
          <image>
-            <Image url="@assets/Creature/slime.png" />
+            <Image url="@assets/Symbol/hazard-sign.png" />
          </image>
       </ImageView>
    </children>

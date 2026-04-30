@@ -5,56 +5,60 @@ public class Arena {
     public static final String VERSION = "0.6.1-Alpha"; 
 
     //Variaveis de instância
-    private Guerreiro heroi;
+    private Guerreiro guerreiro;
     private Inimigo inimigo;
 
     //Metodo para criar os objetos
     public Arena() {
-        this.heroi = new Guerreiro("Heroi", 100, 20, 100, 10);
+        this.guerreiro = new Guerreiro("Heroi", 100, 20, 100, 10);
         
-        int spawn = new Random().nextInt(2);
+        int spawn = new Random().nextInt(11);
 
-        if (spawn == 0){
+        if (spawn <= 5){
             this.inimigo = new Esqueleto();
-        } else if (spawn == 1){
+        } else {
             this.inimigo = new Slime();
         }
     }
+    
 
     //Metodo responsavel pela logica do ataque
     public String turnoDeAtaque() {
-        String log = "";
 
-        // 1. Herói ataca
-        if (heroi.getVida() > 0) {
-            log += heroi.darDano(inimigo).trim(); // .trim() remove espaços/enters extras
-        } else {
-            log += "\n" + heroi.getNome() + " foi derrotado!";
+        StringBuilder logEventos = new StringBuilder();
+
+        // Se qualquer um dos personagens morrer mostrar a seguinte mensagem.
+        if (guerreiro.getVida() <= 0) return "O " + guerreiro.getNome() + " caiu! \n";
+        if (inimigo.getVida() <= 0 ) return "O " + inimigo.getNome() + " foi derrotado! \n";
+
+        // 1. Guerreiro ataca 
+        logEventos.append(guerreiro.darDano(inimigo));
+        logEventos.append("\n");
+
+        // 2. Se o inimigo for o esqueleto e tem a vida maior ou = a 0:
+        if (inimigo instanceof Esqueleto && inimigo.getVida() <= 0) {
+        
+            // 3. Chama a habilidade do esqueleto de remontar.
+            
+            logEventos.append(((Esqueleto) inimigo).remontar()); 
+            logEventos.append("\n");
         }
 
-        // Instancia que revive o esqueleto
-        if(this.inimigo instanceof Esqueleto esqueleto){
+        // 4. Inimigo ataca
+        if(inimigo.getVida() > 0){
+            logEventos.append(guerreiro.tomarDano(inimigo));
 
-            log += esqueleto.remontou();
-            System.out.println(esqueleto.remontou());
+        } 
+        
+        return logEventos.toString();
+        
+    }  
 
-        }
-
-        // 2. Slime contra-ataca (se estiver vivo)
-        if (inimigo.getVida() > 0) {
-            log += "\n" + inimigo.darDano(heroi).trim(); 
-        } else {
-            log += "\n" + inimigo.getNome() + " foi derrotado!";
-        }
-
-        return log + "\n"; // Garante que o PRÓXIMO turno comece em nova linha
-    }
-
-//-------------------------------------CAMPO PARA DECLARAR GETs e SETs--------------------------------------//
+    //-------------------------------------CAMPO PARA DECLARAR GETs e SETs--------------------------------------//
     
-    //Metodos para o MainApp saber os dados dessas variaveis já que são privadas
+    //Metodos para o Main saber os dados dessas variaveis já que são privadas
     public int getVidaHeroi() {
-        return heroi.getVida();
+        return guerreiro.getVida();
     }
 
     public int getVidaInimigo() {
@@ -62,7 +66,7 @@ public class Arena {
     }
 
     public String getNomeHeroi() {
-        return heroi.getNome();
+        return guerreiro.getNome();
     }
 
     public String getNomeInimigo() {
@@ -70,7 +74,7 @@ public class Arena {
     }
 
     public int getDanoHeroi() {
-        return heroi.getDano();
+        return guerreiro.getDano();
     }
 
     public int getDanoInimigo() {
@@ -78,7 +82,7 @@ public class Arena {
     }
 
     public int getVidaMaxHeroi() {
-        return heroi.getVidaMax();
+        return guerreiro.getVidaMax();
     }
 
     public int getVidaMaxInimigo() {

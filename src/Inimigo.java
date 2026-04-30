@@ -14,17 +14,44 @@ public class Inimigo {
         this.vidaMax = vidaMax;
     }
 
-    //Class que faz o inimigo atacar o guerreiro
-    public String darDano(Guerreiro heroi){
-        if(new Random().nextInt(10) >= 5){
-            // PRIMEIRO: Tira a vida
-            String resultado = heroi.tomarDano(this);
+     //metodo para dar dano
+    public String darDano(Guerreiro guerreiro){
         
-            // SEGUNDO: Cria o texto com a vida já menor
-            return resultado;
-        } 
-    
+        //Joga o dado
+        int dado = new Random().nextInt(10);
+
+        //Variavel que recebe as informações de calculo de Dano
+        String resultadoDano = calcDano(dado, guerreiro);
+
+        // 1. Tenta acertar o dano
+        if(resultadoDano != null){
+            return resultadoDano;
+        }
+        // 2. Caso não acerte o dano
         return this.nome + " errou o ataque sozinho!";
+    }
+
+
+//-------------------------------------CAMPO PARA DECLARAR METODOS--------------------------------------//
+
+    //Metodo de esquiva
+    protected String esquiva(int dado){
+        if (dado >= 9){
+            return this.nome + "esquivou!";
+        }
+        return null;
+    }
+
+    //Metodo de ataque
+    protected String calcDano(int dado, Guerreiro guerreiro){
+
+        if (dado >= 5){
+            int danoDado = Math.max(0, guerreiro.getVida() - this.dano);
+            guerreiro.setVida(danoDado);
+
+            return this.nome + " atacou! " + guerreiro.getNome() + " agora tem " + guerreiro.getVida() + "de HP. ";
+        }
+        return null;
     }
 
 //-------------------------------------CAMPO PARA DECLARAR GETs e SETs--------------------------------------//

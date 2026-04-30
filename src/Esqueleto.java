@@ -6,7 +6,7 @@ public class Esqueleto extends Inimigo {
         super("Esqueleto", 50, 15, 100);
     }
 
-    public String remontou(){
+    public String remontar(){
             
         if (this.vida <= 0 && remontouID == false){
 

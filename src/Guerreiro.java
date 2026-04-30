@@ -7,7 +7,6 @@ public class Guerreiro{
     private int vidaMax;
     private int dano;
     private int defesa;
-    private int danoReal;
 
     public Guerreiro(String nome, int vida, int dano, int vidaMax, int defesa){
         this.nome = nome;
@@ -17,41 +16,76 @@ public class Guerreiro{
         this.defesa = defesa;
     }
 
-    public String tomarDano(Inimigo slime) {
-        int dado = new Random().nextInt(10); // Joga o dado uma vez só
-
-        if (dado >= 8) {
-            return this.nome + " Desviou do ataque!\n";
-        } 
-    
-        if (dado >= 5) {
-            this.danoReal = slime.getDano() - this.defesa;
-            if (this.danoReal < 0) this.danoReal = 0;
+    public String tomarDano(Inimigo thisInimigo) {
         
-            this.vida -= this.danoReal;
-            return this.nome + " defendeu! Tomou apenas " + this.danoReal + " de dano.";
+        // Joga o dado
+        int dado = new Random().nextInt(10);
+
+        // Variavel que recebe as informações de esquiva(dado)
+        String resultadoEsquiva = esquiva(dado);
+
+        // 1. Tenta esquiva
+        if (resultadoEsquiva != null){
+            return resultadoEsquiva;
         }
 
-        // Se chegou aqui, é porque o dado foi menor que 5
-        this.vida -= slime.getDano();
-    return this.nome + " não se defendeu e tomou " + slime.getDano() + " de dano cheio!";
-}
+        // 2. Se não parou na esquiva, chama a defesa e retorna o que ela decidir
+        return defesa(thisInimigo, dado);
+   
+    }
 
-    //classe para dar dano
-    public String darDano(Inimigo slime){
-        if (new Random().nextInt(10) >= 5) {
-
-            // PRIMEIRO: Tira a vida
-            slime.setVida(slime.getVida() - this.dano); 
+    //metodo para dar dano
+    public String darDano(Inimigo thisInimigo){
         
-            // SEGUNDO: Cria o texto com a vida já menor
-            return this.nome + " acertou! " + slime.getNome() + " agora tem " + slime.getVida() + " HP.\n";
-        }
+        //Joga o dado
+        int dado = new Random().nextInt(10);
 
+        //Variavel que recebe as informações de calculo de Dano
+        String resultadoDano = calcDano(dado, thisInimigo);
+
+        // 1. Tenta acertar o dano
+        if(resultadoDano != null){
+            return resultadoDano;
+        }
+        // 2. Caso não acerte o dano
         return this.nome + " errou o ataque sozinho!";
     }
 
-//-------------------------------------CAMPO PARA DECLARAR GETs e SETs--------------------------------------//
+//-------------------------------------CAMPO PARA DECLARAR METODOS--------------------------------------//
+
+    //Metodo de esquiva
+    protected String esquiva(int dado){
+        if (dado >= 8){
+            return this.nome + " esquivou!";
+        }
+        return null;
+    }
+
+    //Metodo de defesa
+    protected String defesa(Inimigo Inimigo, int dado){
+
+        if (dado >= 5){
+            int danoReduzido = Math.max(0, Inimigo.getDano() - this.defesa);
+            this.setVida(this.getVida() - danoReduzido);
+            return this.nome + " defendeu! Tomou apenas " + danoReduzido + " de dano.";
+        }
+        this.setVida(this.getVida() - Inimigo.getDano());
+        return this.nome + " falhou na defesa e tomou " + Inimigo.getDano() + " de dano cheio!";    
+    }
+
+    //Metodo de ataque
+    protected String calcDano(int dado, Inimigo Inimigo){
+
+        if (dado >= 5){
+            int danoDado = Math.max(0, Inimigo.getVida() - this.dano);
+            Inimigo.setVida(danoDado);
+
+            return this.nome + " atacou! " + Inimigo.getNome() + " agora tem " + Inimigo.getVida() + "de HP. ";
+        }
+        return null;
+    }
+
+//-------------------------------------CAMPO PARA DECLARAR GETTERS E SETTERS--------------------------------------//
 
     public void setNome(String nome){
         this.nome = nome;
@@ -92,6 +126,8 @@ public class Guerreiro{
     public int getDefesa(){
         return this.defesa;
     }
+
+
 
 
 }
