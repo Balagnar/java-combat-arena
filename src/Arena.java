@@ -93,4 +93,8 @@ public class Arena {
         return this.inimigo;
     }
 
+    public Guerreiro getGuerreiro() {
+    return this.guerreiro;
+}
+
 }
