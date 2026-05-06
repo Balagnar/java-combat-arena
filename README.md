@@ -1,33 +1,58 @@
-# Torre de Ossos
+# 🛡️ Java Combat Arena: Torre de Ossos
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/libgdx/gdx-liftoff).
+Um simulador de RPG que evoluiu de uma interface estática em JavaFX para um mundo explorável em 2D utilizando o motor de jogos **LibGDX**. O projeto agora foca em renderização de mapas profissionais, câmeras dinâmicas e sistemas de animação por frames.
 
-This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
+---
 
-## Platforms
+# 🚀 Funcionalidades da Nova Era (v2.0.0+)
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3; was called 'desktop' in older docs.
+- **Motor Gráfico Profissional:** Migração completa para o framework **LibGDX**, permitindo alta performance e controle total do ciclo de vida do jogo.
+- **Sistema de Mapas (Tiled):** Integração com o editor *Tiled*, utilizando camadas de tiles e renderização via `OrthogonalTiledMapRenderer`.
+- **Câmera Dinâmica:** Implementação de `OrthographicCamera` para controle de visualização, zoom e acompanhamento do personagem.
+- **Gerenciamento de Sprites:** Uso de `TextureRegion` e `Animation` para processar spritesheets de personagens com estados de **Idle** e **Run**.
+- **Resolução Retrô:** Janela configurada para **640x480**, otimizada para a estética de pixel art do projeto.
 
-## Gradle
+---
 
-This project uses [Gradle](https://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
+# 🪵 Histórico de Versões
 
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
+## [v2.0.0] - A Era LibGDX (Atual)
+- **Reboot do Motor:** Substituição do JavaFX pelo LibGDX (LWJGL3).
+- **Arquitetura de Mapa:** Implementação de carregamento de arquivos `.tmx` e gerenciamento de camadas de colisão.
+- **Versionamento Profissional:** Migração do histórico para a branch `feat/v2.0.0` para isolar o novo core do jogo.
+- **Sistema de Herói:** Criação da classe `Jogador` com lógica de animação por tempo de estado (`stateTime`).
 
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+## [v1.5.0] - Legado JavaFX
+- **Sistema de Inventário:** Implementação de `ArrayList` na classe `Guerreiro`.
+- **Mecânica de Itens:** Base lógica para consumíveis e buffs de combate.
+
+## [v1.4.0] - Especialização de Inimigos
+- **Habilidade "Remontar":** Mecânica exclusiva do inimigo Esqueleto.
+- **Identidade Oculta:** Inimigos randômicos revelados apenas no início do turno de ataque.
+
+> *Consulte o histórico de commits para detalhes das versões [v0.0.1] até [v1.3.0].*
+
+---
+
+# 🛠️ Tecnologias Utilizadas
+
+* **Linguagem:** Java 17+
+* **Motor de Jogo:** LibGDX (Core, Lwjgl3)
+* **Build Tool:** Gradle
+* **Design de Mapas:** Tiled Map Editor
+* **Versionamento:** Git (Branching Model: `main` & `feat/v2.0.0`)
+
+---
+
+# 🎮 Como Executar
+
+### Pré-requisitos
+* **Java JDK 17** ou superior.
+* IDE com suporte a Gradle (IntelliJ IDEA, Android Studio ou VS Code).
+
+### Passos
+1. Clone o repositório: `git clone https://github.com/Balagnar/java-combat-arena.git`
+2. Acesse a branch de desenvolvimento: `git checkout feat/v2.0.0`
+3. Execute o projeto via terminal:
+   ```bash
+   ./gradlew lwjgl3:run
