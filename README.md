@@ -1,36 +1,35 @@
 # 🛡️ Java Combat Arena: Torre de Ossos
 
-Um simulador de RPG que evoluiu de uma interface estática em JavaFX para um mundo explorável em 2D utilizando o motor de jogos **LibGDX**. O projeto agora foca em renderização de mapas profissionais, câmeras dinâmicas e sistemas de animação por frames.
+Um simulador de RPG que evoluiu de uma interface estática em JavaFX para um mundo explorável em 2D utilizando o motor de jogos **LibGDX**. O projeto agora foca em mecânicas de **RPG de Turno**, com mapas profissionais, câmeras dinâmicas e sistemas de seleção por grid.
 
 ---
 
-# 🚀 Funcionalidades da Nova Era (v2.0.0+)
+# 🚀 Funcionalidades da Nova Era (v2.4.0+)
 
 - **Motor Gráfico Profissional:** Migração completa para o framework **LibGDX**, permitindo alta performance e controle total do ciclo de vida do jogo.
-- **Sistema de Mapas (Tiled):** Integração com o editor *Tiled*, utilizando camadas de tiles e renderização via `OrthogonalTiledMapRenderer`.
-- **Câmera Dinâmica:** Implementação de `OrthographicCamera` para controle de visualização, zoom e acompanhamento do personagem.
-- **Gerenciamento de Sprites:** Uso de `TextureRegion` e `Animation` para processar spritesheets de personagens com estados de **Idle** e **Run**.
-- **Resolução Retrô:** Janela configurada para **640x480**, otimizada para a estética de pixel art do projeto.
+- **Sistema de Mapas (Tiled):** Integração com o editor *Tiled*, utilizando renderização via `OrthogonalTiledMapRenderer` para múltiplas camadas.
+- **Câmera e Viewport Dinâmicos:** Implementação de `OrthographicCamera` e `FitViewport` (1280x955), garantindo que o jogo mantenha a proporção e escala correta em qualquer monitor.
+- **Mouse Picker (Grid System):** Sistema de conversão de coordenadas (`unproject`) que traduz o clique do mouse na tela para colunas e linhas exatas do tabuleiro (Tiles de 64x64px).
+- **Animações de Sprite:** Gerenciamento de spritesheets através de `TextureRegion` e `Animation`, permitindo estados de movimento e idle fluidos para os personagens.
 
 ---
 
 # 🪵 Histórico de Versões
 
-## [v2.0.0] - A Era LibGDX (Atual)
+## [v2.4.0] - O Despertar do Tabuleiro (Atual)
+- **Sistema de Grid:** Implementação de lógica matemática para transformar cliques de pixels em coordenadas de grade inteiras.
+- **Ajuste de Proporção:** Configuração de `FitViewport` para evitar distorção visual e garantir precisão no clique.
+- **Tratamento de Vetores:** Otimização do uso de `Vector3` para manipulação de coordenadas de entrada, corrigindo erros de inicialização (`NullPointerException`).
+- **Refatoração do Ciclo de Render:** Organização da lógica de entrada para capturar ações apenas no instante do clique, otimizando o processamento.
+
+## [v2.0.0] - A Era LibGDX
 - **Reboot do Motor:** Substituição do JavaFX pelo LibGDX (LWJGL3).
-- **Arquitetura de Mapa:** Implementação de carregamento de arquivos `.tmx` e gerenciamento de camadas de colisão.
-- **Versionamento Profissional:** Migração do histórico para a branch `feat/v2.0.0` para isolar o novo core do jogo.
-- **Sistema de Herói:** Criação da classe `Jogador` com lógica de animação por tempo de estado (`stateTime`).
+- **Arquitetura de Mapa:** Implementação de carregamento de arquivos `.tmx` e renderização de tilesets.
+- **Sistema de Herói:** Criação da classe `Characters` com suporte a animação por tempo de estado (`stateTime`).
 
 ## [v1.5.0] - Legado JavaFX
 - **Sistema de Inventário:** Implementação de `ArrayList` na classe `Guerreiro`.
 - **Mecânica de Itens:** Base lógica para consumíveis e buffs de combate.
-
-## [v1.4.0] - Especialização de Inimigos
-- **Habilidade "Remontar":** Mecânica exclusiva do inimigo Esqueleto.
-- **Identidade Oculta:** Inimigos randômicos revelados apenas no início do turno de ataque.
-
-> *Consulte o histórico de commits para detalhes das versões [v0.0.1] até [v1.3.0].*
 
 ---
 
@@ -40,7 +39,7 @@ Um simulador de RPG que evoluiu de uma interface estática em JavaFX para um mun
 * **Motor de Jogo:** LibGDX (Core, Lwjgl3)
 * **Build Tool:** Gradle
 * **Design de Mapas:** Tiled Map Editor
-* **Versionamento:** Git (Branching Model: `main` & `feat/v2.0.0`)
+* **Matemática:** Álgebra vetorial com `com.badlogic.gdx.math.Vector3`
 
 ---
 
@@ -48,11 +47,9 @@ Um simulador de RPG que evoluiu de uma interface estática em JavaFX para um mun
 
 ### Pré-requisitos
 * **Java JDK 17** ou superior.
-* IDE com suporte a Gradle (IntelliJ IDEA, Android Studio ou VS Code).
+* IDE com suporte a Gradle (IntelliJ IDEA, VS Code ou Android Studio).
 
 ### Passos
-1. Clone o repositório: `git clone https://github.com/Balagnar/java-combat-arena.git`
-2. Acesse a branch de desenvolvimento: `git checkout feat/v2.0.0`
-3. Execute o projeto via terminal:
+1. Clone o repositório: 
    ```bash
-   ./gradlew lwjgl3:run
+   git clone [https://github.com/Balagnar/java-combat-arena.git](https://github.com/Balagnar/java-combat-arena.git)
