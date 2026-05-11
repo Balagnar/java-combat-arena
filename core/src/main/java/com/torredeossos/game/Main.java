@@ -2,78 +2,95 @@ package com.torredeossos.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 public class Main extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Mapa mapa;
-    private Characters player;
-    private FitViewport viewpoint;
-    private OrthographicCamera camera;
-    
-    // Aqui foi o segredo: inicializar com o 'new' para evitar o NullPointerException
-    private Vector3 vector = new Vector3(); 
-
-    @Override
-    public void resize(int width, int height) {
-        viewpoint.update(width, height, true);
-    }
+    SpriteBatch batch;
+    TiledMap mapa;
+    OrthogonalTiledMapRenderer renderer;
+    OrthographicCamera camera;
+    Characters player;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        player = new Characters();
-
-        camera = new OrthographicCamera();
-        viewpoint = new FitViewport(1280, 955, camera);
-
-        camera.position.set(1280 / 2f, 960 / 2f, 0);
-        camera.update();
         
-        mapa = new Mapa();
+        // Carrega o mapa e o renderer
+        mapa = new TmxMapLoader().load("Mapas/teste.tmx"); // Ajuste para o nome do seu arquivo
+        renderer = new OrthogonalTiledMapRenderer(mapa);
+        
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+        player = new Characters();
+        // Aqui você carregaria o seletor único que criamos
+        // player.setSeletor(new TextureRegion(new Texture("UI/seletor_unico.png")));
     }
 
     @Override
     public void render() {
-        ScreenUtils.clear(Color.BLACK);
-
-        // Tudo o que depende do clique deve ficar dentro deste bloco
-        if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)){
-            // 1. Pega a posição bruta do mouse
-            vector.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-            
-            // 2. Traduz a posição da tela para o mundo (coordenadas do mapa)
-            viewpoint.unproject(vector);
-
-            // 3. Calcula a grade (Grid) dividindo pelo tamanho do Tile (64)
-            int coluna = (int) (vector.x / 64);
-            int linha = (int) (vector.y / 64);
-
-            System.out.println("Clique na Coluna: " + coluna + " | Linha: " + linha);
-        }
-
-        // Movimentação e lógica do player
-        player.update(Gdx.graphics.getDeltaTime());
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
-        mapa.drawMapa(camera);
+        renderer.setView(camera);
+        renderer.render();
+
+        // --- LÓGICA DE INPUT E COLISÃO ---
+        if (Gdx.input.justTouched()) {
+            Vector3 click = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(click);
+
+            // 1. Se clicar no boneco, seleciona ele
+            if (player.foiClicado(click.x, click.y)) {
+                player.setSelected(true);
+            } 
+            // 2. Se já estiver selecionado e clicar no chão, tenta mover
+            else if (player.isSelected()) {
+                if (!isTileColidivel(click.x, click.y)) {
+                    player.setTarget(click.x, click.y);
+                }
+            }
+        }
+
+        player.update(Gdx.graphics.getDeltaTime());
 
         batch.setProjectionMatrix(camera.combined);
-
         batch.begin();
         player.draw(batch);
         batch.end();
     }
 
+    // O MÉTODO QUE LÊ A PROPRIEDADE NO TILED
+    private boolean isTileColidivel(float worldX, float worldY) {
+        // Converte pixel para a grade do tile (64x64)
+        int tileX = (int) (worldX / 64);
+        int tileY = (int) (worldY / 64);
+
+        // Pega a camada que você configurou (ex: Agua-fundo)
+        TiledMapTileLayer camada = (TiledMapTileLayer) mapa.getLayers().get("Agua-fundo");
+
+        if (camada != null) {
+            TiledMapTileLayer.Cell celula = camada.getCell(tileX, tileY);
+            if (celula != null && celula.getTile() != null) {
+                // Checa se o tile nessa célula tem a propriedade "colidivel"
+                return celula.getTile().getProperties().containsKey("colidivel");
+            }
+        }
+        return false; // Se não tem tile ou camada, está livre para andar
+    }
+
     @Override
     public void dispose() {
         batch.dispose();
-        // Lembre-se de dar dispose no mapa e nas texturas do player quando possível
+        mapa.dispose();
+        renderer.dispose();
     }
 }
